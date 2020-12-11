@@ -14,6 +14,21 @@ const sharedOutputStrings = {
 
 export default {
   zoneId: ZoneId.CastrumMarinumExtreme,
+  timelineFile: 'emerald_weapon-ex.txt',
+  timelineTriggers: [
+    {
+      id: 'EmeraldEx Bit Storm',
+      regex: /Bit Storm/,
+      beforeSeconds: 4,
+      response: Responses.getIn(),
+    },
+    {
+      id: 'EmeraldEx Photon Ring',
+      regex: /Photon Ring/,
+      beforeSeconds: 4,
+      response: Responses.getOut(),
+    },
+  ],
   triggers: [
     {
       id: 'EmeraldEx Emerald Shot',
@@ -44,6 +59,7 @@ export default {
         text: {
           en: 'Get orbs',
           de: 'Orbs nehmen',
+          fr: 'Prenez les orbes',
           cn: '撞球',
           ko: '구슬 부딪히기',
         },
@@ -62,6 +78,8 @@ export default {
       outputStrings: {
         text: {
           en: 'Get Near Same Polarity Mines',
+          de: 'Nahe den Bomben mit gleicher Polarisierung',
+          fr: 'Allez vers les mines de même polarité',
           ko: '같은 극성 폭탄쪽으로',
         },
       },
@@ -99,6 +117,7 @@ export default {
         text: {
           en: 'Flare on YOU',
           de: 'Flare auf DIR',
+          fr: 'Brasier sur VOUS',
           ja: '自分にフレア',
           cn: '核爆点名',
           ko: '플레어 대상자',
@@ -113,6 +132,8 @@ export default {
       outputStrings: {
         text: {
           en: 'Bait Lines Away From Safe Spot',
+          de: 'Linien weg vom Safespot ködern',
+          fr: 'Orientez les lignes hors de la zone sûre',
           ko: '안전지대 밖으로 장판 유도',
         },
       },
@@ -123,20 +144,6 @@ export default {
       netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55[D9]1', capture: false }),
       netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55[D9]1', capture: false }),
       netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55[D9]1', capture: false }),
-      response: Responses.getOut(),
-    },
-    {
-      id: 'EmeraldEx Bit Storm',
-      netRegex: NetRegexes.addedCombatant({ name: 'Claw Bit', capture: false }),
-      delaySeconds: 3,
-      suppressSeconds: 2,
-      response: Responses.getIn(),
-    },
-    {
-      id: 'EmeraldEx Photon Ring',
-      netRegex: NetRegexes.removingCombatant({ name: 'Claw Bit', capture: false }),
-      delaySeconds: 3,
-      suppressSeconds: 2,
       response: Responses.getOut(),
     },
     {
@@ -173,6 +180,7 @@ export default {
         text: {
           en: 'Go sides, aim across',
           de: 'Geh zu den Seiten, ziehle nach gegenüber',
+          fr: 'Allez sur les côtés, ne chevauchez pas les lignes',
           cn: '靠边，注意箭头朝向',
           ko: '구석으로, 서로 겹치지 않게',
         },
@@ -189,6 +197,7 @@ export default {
         text: {
           en: 'Swords',
           de: 'Schwerter',
+          fr: 'Épées',
           cn: '注意落剑顺序',
           ko: '검',
         },
@@ -222,6 +231,7 @@ export default {
         text: {
           en: 'X to cards, + to intercards',
           de: 'X in die Cardinalen, + in die Intercardinale Himmelsrichtungen',
+          fr: 'X sur les cardinaux, + en intercadinal',
           cn: '靠边放剑(十字四角)',
           ko: 'X는 동서남북, +는 대각위치로',
         },
@@ -238,6 +248,7 @@ export default {
         text: {
           en: 'Numbered Divebombs',
           de: 'Nummerierte Sturzflüge',
+          fr: 'Mines numérotées',
           cn: '注意士兵顺序，结束返回中央',
           ko: '엑사플레어 준비',
         },
@@ -247,20 +258,26 @@ export default {
   timelineReplace: [
     {
       'locale': 'de',
+      'missingTranslations': true,
       'replaceSync': {
         'The Emerald Weapon': 'Smaragd-Waffe',
+        'Claw Bit': 'Satellitenarm',
       },
     },
     {
       'locale': 'fr',
+      'missingTranslations': true,
       'replaceSync': {
         'The Emerald Weapon': 'Arme Émeraude',
+        'Claw Bit': 'main volante',
       },
     },
     {
       'locale': 'ja',
+      'missingTranslations': true,
       'replaceSync': {
         'The Emerald Weapon': 'エメラルドウェポン',
+        'Claw Bit': 'ハンドビット',
       },
     },
   ],
