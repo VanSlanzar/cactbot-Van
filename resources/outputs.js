@@ -117,7 +117,7 @@ const Outputs = new ThrowOnInvalidProxy({
     en: 'Avoid tank cleave',
     de: 'Tank Cleave ausweichen',
     fr: 'Évitez le tank cleave',
-    ja: '前方範囲攻撃を避け',
+    ja: '前方範囲攻撃を避ける',
     cn: '远离顺劈',
     ko: '광역 탱버 피하기',
   },
@@ -289,13 +289,14 @@ const Outputs = new ThrowOnInvalidProxy({
     fr: 'Allez Devant',
     ja: '前へ',
     cn: '去前面',
+    ko: '앞으로',
   },
   // getUnder is used when you have to get into the bosses hitbox
   getUnder: {
     en: 'Get Under',
     de: 'Unter ihn',
     fr: 'En dessous',
-    ja: 'ボスと貼り付く',
+    ja: 'ボスに貼り付く',
     cn: '去脚下',
     ko: '보스 아래로',
   },
@@ -499,7 +500,7 @@ const Outputs = new ThrowOnInvalidProxy({
     en: 'Away from ${player}',
     de: 'Weg von ${player}',
     fr: 'Éloignez-vous de ${player}',
-    ja: '${player}から離れ',
+    ja: '${player}から離れる',
     cn: '远离${player}',
     ko: '"${player}"에서 멀어지기',
   },
@@ -573,7 +574,7 @@ const Outputs = new ThrowOnInvalidProxy({
     en: 'WAKE UP',
     de: 'AUFWACHEN',
     fr: 'RÉVEILLES-TOI',
-    ja: '目を覚めて！',
+    ja: '目を覚まして！',
     cn: '醒醒！动一动！！',
     ko: '강제 퇴장 7분 전',
   },
@@ -606,7 +607,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Norden',
     fr: 'Nord',
     ja: '北',
-    cn: '北',
+    cn: '上(北)',
     ko: '북쪽',
   },
   south: {
@@ -614,7 +615,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Süden',
     fr: 'Sud',
     ja: '南',
-    cn: '南',
+    cn: '下(南)',
     ko: '남쪽',
   },
   east: {
@@ -622,7 +623,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Osten',
     fr: 'Est',
     ja: '東',
-    cn: '东',
+    cn: '右(东)',
     ko: '동쪽',
   },
   west: {
@@ -630,7 +631,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Westen',
     fr: 'Ouest',
     ja: '西',
-    cn: '西',
+    cn: '左(西)',
     ko: '서쪽',
   },
   northwest: {
@@ -638,7 +639,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Nordwesten',
     fr: 'nord-ouest',
     ja: '北西',
-    cn: '西北',
+    cn: '左上(西北)',
     ko: '북서',
   },
   northeast: {
@@ -646,7 +647,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Nordosten',
     fr: 'nord-est',
     ja: '北東',
-    cn: '东北',
+    cn: '右上(东北)',
     ko: '북동',
   },
   southwest: {
@@ -654,7 +655,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Südwesten',
     fr: 'sud-ouest',
     ja: '南西',
-    cn: '西南',
+    cn: '左下(西南)',
     ko: '남서',
   },
   southeast: {
@@ -662,7 +663,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'Südosten',
     fr: 'sud-est',
     ja: '南東',
-    cn: '东南',
+    cn: '右下(东南)',
     ko: '남동',
   },
   dirN: {
@@ -670,7 +671,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'N',
     fr: 'N',
     ja: '北',
-    cn: '北',
+    cn: '上(北)',
     ko: '북쪽',
   },
   dirS: {
@@ -678,7 +679,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'S',
     fr: 'S',
     ja: '南',
-    cn: '南',
+    cn: '下(南)',
     ko: '남쪽',
   },
   dirE: {
@@ -686,7 +687,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'O',
     fr: 'E',
     ja: '東',
-    cn: '东',
+    cn: '右(东)',
     ko: '동쪽',
   },
   dirW: {
@@ -694,7 +695,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'W',
     fr: 'O',
     ja: '西',
-    cn: '西',
+    cn: '左(西)',
     ko: '서쪽',
   },
   dirNW: {
@@ -702,7 +703,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'NW',
     fr: 'NO',
     ja: '北西',
-    cn: '西北',
+    cn: '左上(西北)',
     ko: '북서',
   },
   dirNE: {
@@ -710,7 +711,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'NO',
     fr: 'NE',
     ja: '北東',
-    cn: '东北',
+    cn: '右上(东北)',
     ko: '북동',
   },
   dirSW: {
@@ -718,7 +719,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'SW',
     fr: 'SO',
     ja: '南西',
-    cn: '西南',
+    cn: '左下(西南)',
     ko: '남서',
   },
   dirSE: {
@@ -726,7 +727,7 @@ const Outputs = new ThrowOnInvalidProxy({
     de: 'SO',
     fr: 'SE',
     ja: '南東',
-    cn: '东南',
+    cn: '右下(东南)',
     ko: '남동',
   },
   // Literal numbers.

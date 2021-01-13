@@ -183,37 +183,81 @@ const intermediateRelativityOutputStrings = {
     de: 'Flare',
     fr: 'Brasier',
     ja: 'フレア',
+    ko: '플레어',
   },
   stack: {
     en: 'Stack',
     de: 'Sammeln',
     fr: 'Packez-vous',
     ja: '頭割り',
+    ko: '쉐어',
   },
   shadoweye: {
     en: 'Gaze',
     de: 'Blick',
     fr: 'Regard',
     ja: 'シャドウアイ',
+    ko: '마안',
   },
   eruption: {
     en: 'Spread',
     de: 'Verteilen',
     fr: 'Dispersez-vous',
     ja: '散開',
+    ko: '산개',
   },
   blizzard: {
     en: 'Ice',
     de: 'Eis',
     fr: 'Glace',
     ja: 'ブリザガ',
+    ko: '블리자가',
   },
   aero: {
     en: 'Aero',
     de: 'Wind',
     fr: 'Vent',
     ja: 'エアロガ',
+    ko: '에어로가',
   },
+};
+
+// Returns integer value of x, y in matches based on cardinal or intercardinal
+const matchedPositionToDir = (matches) => {
+  // Positions are moved downward 75
+  const y = parseFloat(matches.y) + 75;
+  const x = parseFloat(matches.x);
+
+  // In Basic Relativity, hourglass positions are the 8 cardinals + numerical
+  // slop on a radius=20 circle.
+  // N = (0, -95), E = (20, -75), S = (0, -55), W = (-20, -75)
+  // NE = (14, -89), SE = (14, -61), SW = (-14, -61), NW = (-14, -89)
+  //
+  // In Advanced Relativity, hourglass positions are the 3 northern positions and
+  // three southern positions, plus numerical slop on a radius=10 circle
+  // NW = (-10, -80), N = (0, -86), NE = (10, -80)
+  // SW = (-10, -69), S = (0, -64), SE = (10, -69)
+  //
+  // Starting with northwest to favor sorting between north and south for
+  // Advanced Relativity party splits.
+  // Map NW = 0, N = 1, ..., W = 7
+
+  return (Math.round(5 - 4 * Math.atan2(x, y) / Math.PI) % 8);
+};
+
+// Convert dir to Output
+const dirToOutput = (dir, output) => {
+  const dirs = {
+    0: output.northwest(),
+    1: output.north(),
+    2: output.northeast(),
+    3: output.east(),
+    4: output.southeast(),
+    5: output.south(),
+    6: output.southwest(),
+    7: output.west(),
+  };
+  return (dirs[dir]);
 };
 
 export default {
@@ -234,6 +278,7 @@ export default {
             fr: 'Tank buster + Swap',
             ja: 'タンクバスター + スイッチ',
             cn: '死刑 + 换T',
+            ko: '탱버 + 교대',
           },
           formlessBusterOnYOU: {
             en: 'Tank Buster on YOU',
@@ -241,6 +286,7 @@ export default {
             fr: 'Tank buster sur VOUS',
             ja: '自分にタンクバスター',
             cn: '死刑点名',
+            ko: '탱버 대상자',
           },
           // The first round has only one blue.
           titanBlueSingular: {
@@ -248,6 +294,7 @@ export default {
             de: 'Blau - Gewicht',
             fr: 'Poids bleu',
             ja: '青、重圧',
+            ko: '파랑',
           },
           // The second and two rounds of bombs have a partner.
           // The third is technically fixed by role with a standard party (one dps, one !dps),
@@ -257,18 +304,21 @@ export default {
             de: 'Blau (mit ${player})',
             fr: 'Bleu (avec ${player})',
             ja: '青、重圧 (${player}と)',
+            ko: '파랑 (다른 대상자: ${player})',
           },
           titanOrangeStack: {
             en: 'Orange Stack',
             de: 'Orange - versammeln',
             fr: 'Orange, package',
             ja: '橙、頭割り',
+            ko: '주황: 집합',
           },
           titanYellowSpread: {
             en: 'Yellow Spread',
             de: 'Gelb - Verteilen',
             fr: 'Jaune, dispersion',
             ja: '黄、散開',
+            ko: '노랑: 산개',
           },
           // This is sort of redundant, but if folks want to put "square" or something in the text,
           // having these be separate would allow them to configure them separately.
@@ -374,12 +424,14 @@ export default {
             de: 'Tankbuster + Wechsel',
             fr: 'Tank buster + Swap',
             ja: 'タンクバスター + スイッチ',
+            ko: '탱버 + 교대',
           },
           tankBusters: {
             en: 'Tank Busters',
             de: 'Tankbuster',
             fr: 'Tank busters',
             ja: 'タンクバスター',
+            ko: '탱버',
           },
         };
 
@@ -406,6 +458,7 @@ export default {
       netRegexFr: NetRegexes.startsUsing({ source: 'Promesse D\'Éden', id: '58AD', capture: false }),
       netRegexJa: NetRegexes.startsUsing({ source: 'プロミス・オブ・エデン', id: '58AD', capture: false }),
       response: Responses.goLeft('info'),
+      run: (data) => data.isDoorBoss = true,
     },
     {
       id: 'E12S Promise Rapturous Reach Right',
@@ -414,6 +467,7 @@ export default {
       netRegexFr: NetRegexes.startsUsing({ source: 'Promesse D\'Éden', id: '58AE', capture: false }),
       netRegexJa: NetRegexes.startsUsing({ source: 'プロミス・オブ・エデン', id: '58AE', capture: false }),
       response: Responses.goRight('info'),
+      run: (data) => data.isDoorBoss = true,
     },
     {
       id: 'E12S Promise Obliteration',
@@ -423,7 +477,6 @@ export default {
       netRegexJa: NetRegexes.startsUsing({ source: 'プロミス・オブ・エデン', id: '58A8', capture: false }),
       condition: Conditions.caresAboutAOE(),
       response: Responses.aoe(),
-      run: (data) => data.isDoorBoss = true,
     },
     {
       id: 'E12S Promise Junction Shiva',
@@ -609,6 +662,21 @@ export default {
       response: Responses.aoe(),
     },
     {
+      id: 'E12S Relativity Phase',
+      netRegex: NetRegexes.startsUsing({ source: 'Oracle Of Darkness', id: '58E[0-3]' }),
+      netRegexDe: NetRegexes.startsUsing({ source: 'Orakel Der Dunkelheit', id: '58E[0-3]' }),
+      netRegexFr: NetRegexes.startsUsing({ source: 'Prêtresse Des Ténèbres', id: '58E[0-3]' }),
+      netRegexJa: NetRegexes.startsUsing({ source: '闇の巫女', id: '58E[0-3]' }),
+      run: (data, matches) => {
+        data.phase = {
+          '58E0': 'basic',
+          '58E1': 'intermediate',
+          '58E2': 'advanced',
+          '58E3': 'terminal',
+        }[matches.id];
+      },
+    },
+    {
       id: 'E12S Oracle Basic Relativity',
       netRegex: NetRegexes.startsUsing({ source: 'Oracle Of Darkness', id: '58E0', capture: false }),
       netRegexDe: NetRegexes.startsUsing({ source: 'Orakel Der Dunkelheit', id: '58E0', capture: false }),
@@ -616,7 +684,6 @@ export default {
       netRegexJa: NetRegexes.startsUsing({ source: '闇の巫女', id: '58E0', capture: false }),
       condition: Conditions.caresAboutAOE(),
       response: Responses.bigAoe(),
-      run: (data) => data.phase = 'basic',
     },
     {
       id: 'E12S Oracle Intermediate Relativity',
@@ -626,7 +693,6 @@ export default {
       netRegexJa: NetRegexes.startsUsing({ source: '闇の巫女', id: '58E1', capture: false }),
       condition: Conditions.caresAboutAOE(),
       response: Responses.bigAoe(),
-      run: (data) => data.phase = 'intermediate',
     },
     {
       id: 'E12S Oracle Advanced Relativity',
@@ -636,7 +702,6 @@ export default {
       netRegexJa: NetRegexes.startsUsing({ source: '闇の巫女', id: '58E2', capture: false }),
       condition: Conditions.caresAboutAOE(),
       response: Responses.bigAoe(),
-      run: (data) => data.phase = 'advanced',
     },
     {
       id: 'E12S Oracle Terminal Relativity',
@@ -646,7 +711,6 @@ export default {
       netRegexJa: NetRegexes.startsUsing({ source: '闇の巫女', id: '58E3', capture: false }),
       condition: Conditions.caresAboutAOE(),
       response: Responses.bigAoe(),
-      run: (data) => data.phase = 'terminal',
     },
     {
       id: 'E12S Oracle Darkest Dance',
@@ -665,6 +729,7 @@ export default {
           de: 'Ködern - Weit weg',
           fr: 'Attirez au loin',
           ja: '遠くに誘導',
+          ko: '멀리 유도하기',
         },
         partyUnder: {
           en: 'Get Under',
@@ -743,6 +808,7 @@ export default {
           de: '${effect1} > ${effect2} > ${effect3}',
           fr: '${effect1} > ${effect2} > ${effect3}',
           ja: '${effect1} > ${effect2} > ${effect3}',
+          ko: '${effect1} > ${effect2} > ${effect3}',
         },
       }, intermediateRelativityOutputStrings),
     },
@@ -793,6 +859,7 @@ export default {
           de: 'Wegschauen',
           fr: 'Regardez ailleurs',
           ja: '背中を向け',
+          ko: '뒤돌기',
         },
       },
     },
@@ -810,6 +877,81 @@ export default {
           de: 'Nach draußen schauen',
           fr: 'Regardez vers l\'extérieur',
           ja: '外に向け',
+          ko: '바깥 보기',
+        },
+      },
+    },
+    {
+      id: 'E12S Basic Relativity Yellow Hourglass',
+      // Orient where "Yellow" Anger's Hourglass spawns
+      netRegex: NetRegexes.addedCombatantFull({ npcNameId: '9824' }),
+      durationSeconds: 15,
+      infoText: (data, matches, output) => {
+        return output.hourglass({
+          dir: dirToOutput(matchedPositionToDir(matches), output),
+        });
+      },
+      outputStrings: {
+        north: Outputs.north,
+        northeast: Outputs.northeast,
+        east: Outputs.east,
+        southeast: Outputs.southeast,
+        south: Outputs.south,
+        southwest: Outputs.southwest,
+        west: Outputs.west,
+        northwest: Outputs.northwest,
+        hourglass: {
+          en: 'Yellow: ${dir}',
+          de: 'Gelb: ${dir}',
+          fr: 'Jaune : ${dir}',
+          ko: '노랑: ${dir}',
+        },
+      },
+    },
+    {
+      id: 'E12S Adv Relativity Hourglass Collect',
+      // Collect Sorrow's Hourglass locations
+      netRegex: NetRegexes.addedCombatantFull({ npcNameId: '9823' }),
+      run: (data, matches) => {
+        const id = matches.id.toUpperCase();
+
+        data.sorrows = data.sorrows || {};
+        data.sorrows[id] = matchedPositionToDir(matches);
+      },
+    },
+    {
+      id: 'E12S Adv Relativity Hourglass Collect Yellow Tethers',
+      // '0086' is the Yellow tether that buffs "Quicken"
+      // '0085' is the Red tether that buffs "Slow"
+      netRegex: NetRegexes.tether({ id: '0086' }),
+      condition: (data, matches) => data.phase === 'advanced',
+      durationSeconds: 8,
+      suppressSeconds: 3,
+      infoText: (data, matches, output) => {
+        const sorrow1 = data.sorrows[matches.sourceId.toUpperCase()];
+
+        // Calculate opposite side
+        const sorrow2 = (sorrow1 + 4) % 8;
+
+        return output.hourglass({
+          dir1: sorrow1 < sorrow2 ? dirToOutput(sorrow1, output) : dirToOutput(sorrow2, output),
+          dir2: sorrow1 > sorrow2 ? dirToOutput(sorrow1, output) : dirToOutput(sorrow2, output),
+        });
+      },
+      outputStrings: {
+        north: Outputs.north,
+        northeast: Outputs.northeast,
+        east: Outputs.east,
+        southeast: Outputs.southeast,
+        south: Outputs.south,
+        southwest: Outputs.southwest,
+        west: Outputs.west,
+        northwest: Outputs.northwest,
+        hourglass: {
+          en: 'Yellow: ${dir1} / ${dir2}',
+          de: 'Gelb: ${dir1} / ${dir2}',
+          fr: 'Jaune : ${dir1} / ${dir2}',
+          ko: '노랑: ${dir1} / ${dir2}',
         },
       },
     },
@@ -828,9 +970,6 @@ export default {
         'Sorrow\'s Hourglass': 'Sanduhr der Sorge',
       },
       'replaceText': {
-        '--1--': '--1--',
-        '--2--': '--2--',
-        '--3--': '--3--',
         'Advanced Relativity': 'Fortgeschrittene Relativität',
         '(?<!(Singular|Dual|Triple) )Apocalypse': 'Apokalypse',
         'Basic Relativity': 'Grundlegende Relativität',
@@ -906,9 +1045,6 @@ export default {
         'Sorrow\'s Hourglass': 'sablier de chagrin',
       },
       'replaceText': {
-        '--1--': '--1--',
-        '--2--': '--2--',
-        '--3--': '--3--',
         'Advanced Relativity': 'Relativité avancée',
         '(?<!(Singular|Dual|Triple) )Apocalypse': 'Apocalypse',
         'Basic Relativity': 'Relativité basique',
@@ -984,9 +1120,6 @@ export default {
         'Sorrow\'s Hourglass': '悲しみの砂時計',
       },
       'replaceText': {
-        '--1--': '--1--',
-        '--2--': '--2--',
-        '--3--': '--3--',
         'Advanced Relativity': '時間圧縮・急',
         '(?<!(Singular|Dual|Triple) )Apocalypse': 'アポカリプス',
         'Basic Relativity': '時間圧縮・序',
