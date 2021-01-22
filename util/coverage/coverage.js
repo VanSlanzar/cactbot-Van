@@ -159,6 +159,9 @@ const zoneGridHeaders = {
   },
   oopsy: {
     en: 'Oopsy',
+    fr: 'Oopsy',
+    ja: 'Oopsy',
+    cn: '犯错监控',
   },
   // TODO: missing translation items
 };
