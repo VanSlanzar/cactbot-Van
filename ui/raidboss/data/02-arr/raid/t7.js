@@ -1,4 +1,4 @@
-import Conditions from '../../../../../resources/conditions.js';
+import Conditions from '../../../../../resources/conditions.ts';
 import NetRegexes from '../../../../../resources/netregexes.js';
 import Regexes from '../../../../../resources/regexes.js';
 import { Responses } from '../../../../../resources/responses.js';
@@ -167,7 +167,7 @@ export default {
           en: 'Dodge Shriek',
           de: 'Schrei Der Verwünschung ausweichen',
           fr: 'Esquivez le cri maudit',
-          ja: '呪詛の叫声に避け',
+          ja: '呪詛の叫声を避ける',
           cn: '躲避诅咒之嚎',
           ko: '저주의 외침 피하기',
         },

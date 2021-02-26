@@ -20,6 +20,37 @@ module.exports = {
         'sourceType': 'script',
       },
     },
+    {
+      'files': ['**/*.ts'],
+      'parser': '@typescript-eslint/parser',
+      'plugins': ['@typescript-eslint'],
+      'parserOptions': {
+        'tsconfigRootDir': __dirname,
+        'project': ['./tsconfig.json'],
+      },
+      'extends': [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      ],
+      'rules': {
+        '@typescript-eslint/no-non-null-assertion': 2,
+        '@typescript-eslint/no-explicit-any': 2,
+        '@typescript-eslint/member-delimiter-style': ['error', {
+          'multiline': {
+            'delimiter': 'semi',
+            'requireLast': true,
+          },
+          'singleline': {
+            'delimiter': 'semi',
+            'requireLast': false,
+          },
+        }],
+        'func-style': ['error', 'expression', { 'allowArrowFunctions': true }],
+        'object-shorthand': ['error', 'consistent'],
+        '@typescript-eslint/method-signature-style': ['error', 'property'],
+        '@typescript-eslint/explicit-module-boundary-types': ['error', { 'allowHigherOrderFunctions': false }],
+      },
+    },
   ],
   'ignorePatterns': [
     'dist/',
@@ -40,6 +71,13 @@ module.exports = {
   'plugins': [
     'rulesdir',
   ],
+  'settings': {
+    'import/resolver': {
+      'node': {
+        'extensions': ['.d.ts', '.ts', '.js'],
+      },
+    },
+  },
   'rules': {
     'arrow-spacing': [
       'error',

@@ -1,4 +1,4 @@
-import Conditions from '../../../../../resources/conditions.js';
+import Conditions from '../../../../../resources/conditions.ts';
 import NetRegexes from '../../../../../resources/netregexes.js';
 import { Responses } from '../../../../../resources/responses.js';
 import ZoneId from '../../../../../resources/zone_id.js';
@@ -239,7 +239,7 @@ export default {
           en: 'Avoid Laser',
           de: 'Laser ausweichen',
           fr: 'Évitez le laser',
-          ja: 'アバランチに避け',
+          ja: 'アバランチを避ける',
           cn: '躲避击退激光',
           ko: '레이저 피하기',
         },

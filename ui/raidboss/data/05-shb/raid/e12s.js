@@ -1,6 +1,6 @@
-import Conditions from '../../../../../resources/conditions.js';
+import Conditions from '../../../../../resources/conditions.ts';
 import NetRegexes from '../../../../../resources/netregexes.js';
-import Outputs from '../../../../../resources/outputs.js';
+import Outputs from '../../../../../resources/outputs.ts';
 import { Responses } from '../../../../../resources/responses.js';
 import ZoneId from '../../../../../resources/zone_id.js';
 
@@ -837,18 +837,30 @@ export default {
           longFire: {
             en: 'Long Fire',
             de: 'langes Feuer',
+            ja: 'ファイガ(遅い)',
+            cn: '长火',
+            ko: '느린 파이가',
           },
           shortFire: {
             en: 'Short Fire',
             de: 'kurzes Feuer',
+            ja: 'ファイガ(早い)',
+            cn: '短火',
+            ko: '빠른 파이가',
           },
           longIce: {
             en: 'Long Ice',
             de: 'langes Eis',
+            ja: 'ブリザガ(遅い)',
+            cn: '长冰',
+            ko: '느린 블리자가',
           },
           shortIce: {
             en: 'Short Ice',
             de: 'kurzes Eis',
+            ja: 'ブリザガ(早い)',
+            cn: '短冰',
+            ko: '빠른 블리자가',
           },
         };
 
@@ -992,8 +1004,7 @@ export default {
           fr: 'Ne regardez pas ${player1} et ${player2}',
           ja: '${player1}と${player2}を見ない',
           cn: '背对${player1}和${player2}',
-          // TODO: Verify this localization:
-          // ko: '${player1}와 ${player2}에게서 뒤돌기',
+          ko: '${player1}와 ${player2}에게서 뒤돌기',
         },
         lookAwayFromPlayer: Outputs.lookAwayFromPlayer,
       },

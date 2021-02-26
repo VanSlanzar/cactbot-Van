@@ -1,4 +1,4 @@
-import Conditions from '../../../../../resources/conditions.js';
+import Conditions from '../../../../../resources/conditions.ts';
 import NetRegexes from '../../../../../resources/netregexes.js';
 import { Responses } from '../../../../../resources/responses.js';
 import ZoneId from '../../../../../resources/zone_id.js';
@@ -35,7 +35,7 @@ export default {
           en: 'Rot on ${player}',
           de: 'Fäulnis auf ${player}',
           fr: 'Pourriture sur ${player}',
-          ja: '自分に${player}',
+          ja: '${player}にアラガンロット',
           cn: '毒点 ${player}',
         },
         rotOnYou: {
