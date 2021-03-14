@@ -1,10 +1,10 @@
-import PartyTracker from '../../resources/party.js';
-import Regexes from '../../resources/regexes.ts';
-import { triggerOutputFunctions } from '../../resources/responses.js';
-import UserConfig from '../../resources/user_config.js';
-import Util from '../../resources/util.ts';
+import PartyTracker from '../../resources/party';
+import Regexes from '../../resources/regexes';
+import { triggerOutputFunctions } from '../../resources/responses';
+import UserConfig from '../../resources/user_config';
+import Util from '../../resources/util';
 import raidbossFileData from './data/manifest.txt';
-import raidbossOptions from './raidboss_options.js';
+import raidbossOptions from './raidboss_options';
 
 const kOptionKeys = {
   output: 'Output',
@@ -242,18 +242,34 @@ const kMiscTranslations = {
   // Shown when the UI can't decipher the output of a function.
   valueIsFunction: {
     en: '(function)',
+    de: '(Funktion)',
+    fr: '(Fonction)',
+    ja: '(関数)',
+    cn: '(函数)',
   },
   // Warning label for triggers without ids or overridden triggers.
   warning: {
     en: '⚠️ warning',
+    de: '⚠️ Warnung',
+    fr: '⚠️ Attention',
+    ja: '⚠️ 警告',
+    cn: '⚠️ 警告',
   },
   // Shows up for triggers without ids.
   missingId: {
     en: 'missing id field',
+    de: 'Fehlendes ID Feld',
+    fr: 'Champ ID manquant',
+    ja: 'idがありません',
+    cn: '缺少id属性',
   },
   // Shows up for triggers that are overridden by other triggers.
   overriddenByFile: {
     en: 'overridden by "${file}"',
+    de: 'Überschrieben durch "${file}"',
+    fr: 'Écrasé(e) par "${file}"',
+    ja: '"${file}"に上書きました',
+    cn: '被"${file}"文件覆盖',
   },
 };
 
